@@ -16,7 +16,7 @@ class ByteVectorDataset(Dataset):
 			idx = idx.to_list()
 
 		file_name = self.labels.iloc[idx, 0]
-		byte_vector = torch.from_numpy(self.byte_vectors[file_name].copy())
+		byte_vector = torch.from_numpy(self.byte_vectors[file_name].astype(float)).float()
 		label = self.labels.iloc[idx, 2]
 		if self.transform:
 			byte_vector = self.transform(byte_vector)
