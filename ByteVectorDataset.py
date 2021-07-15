@@ -20,7 +20,11 @@ class ByteVectorDataset(Dataset):
 		label = self.labels.iloc[idx, 2]
 		if self.transform:
 			byte_vector = self.transform(byte_vector)
-		return byte_vector, label
+
+		label_map = {"image": torch.tensor(0), "freetext": torch.tensor(1), "tabular": torch.tensor(2), 
+                "json/xml": torch.tensor(3),"netcdf": torch.tensor(4),"unknown": torch.tensor(5)}
+
+		return byte_vector, label_map[label]
 
 
 ### included for testing purposes
